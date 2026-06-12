@@ -1,0 +1,325 @@
+/* Custom styles for Chaos Dorm Rush: Daydream Mode */
+
+/* Root variable definitions for consistent color palette */
+:root {
+    --bg-dark: #0f0c1b;
+    --card-bg: rgba(26, 21, 44, 0.75);
+    --accent-pastel: #b19ffb;
+    --text-light: #f1ecff;
+    --text-muted: #a39bb8;
+    --border-color: rgba(177, 159, 251, 0.25);
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --neon-pink: #ff007f;
+}
+
+/* Reset margins and set up a beautiful full-screen background */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Outfit', sans-serif;
+    background: radial-gradient(circle at center, #1b1437 0%, var(--bg-dark) 100%);
+    color: var(--text-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Container to hold and align everything nicely in the middle */
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1000px;
+    width: 95%;
+    padding: 20px;
+}
+
+/* Title and header spacing */
+.game-header {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.game-header h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin: 0 0 5px 0;
+    background: linear-gradient(45deg, #ff9cfc, #9cffd3, #9cb4ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    letter-spacing: 1px;
+}
+
+.game-header .subtitle {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* Wrapper to contain canvas and overlays */
+.canvas-wrapper {
+    position: relative;
+    width: 960px;
+    height: 540px;
+    border-radius: 12px;
+    border: 4px solid var(--border-color);
+    box-shadow: 0 20px 40px var(--shadow-color), 
+                0 0 30px rgba(177, 159, 251, 0.15);
+    overflow: hidden;
+    background-color: #1a162b;
+}
+
+/* The Canvas itself */
+#gameCanvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* --- GUIDE OVERLAY STYLING --- */
+.guide-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(12, 9, 23, 0.95);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 25px;
+    box-sizing: border-box;
+    z-index: 10;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    visibility: visible;
+    opacity: 1;
+}
+
+.guide-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.guide-title {
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin: 0 0 10px 0;
+    background: linear-gradient(90deg, #ff9cfc, #ffd166, #9cffd3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 1px;
+}
+
+/* Grid columns for items, dream items, obstacles */
+.guide-content {
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 1;
+    margin: 5px 0 15px 0;
+    gap: 15px;
+}
+
+.guide-col {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+}
+
+.guide-col h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.05rem;
+    color: var(--accent-pastel);
+    font-weight: 600;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 5px;
+}
+
+.guide-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.guide-col li {
+    font-size: 0.82rem;
+    display: flex;
+    align-items: center;
+    color: var(--text-muted);
+    line-height: 1.25;
+}
+
+.emoji {
+    font-size: 1.1rem;
+    margin-right: 8px;
+    display: inline-block;
+    width: 20px;
+    text-align: center;
+}
+
+.guide-col li strong {
+    color: var(--text-light);
+}
+
+.guide-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 10px;
+}
+
+.controls-text {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0 0 10px 0;
+}
+
+.start-btn {
+    background: linear-gradient(135deg, #b19ffb 0%, #ff9cfc 100%);
+    border: none;
+    padding: 10px 24px;
+    color: #0f0c1b;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(177, 159, 251, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+    outline: none;
+}
+
+.start-btn:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 20px rgba(177, 159, 251, 0.6);
+}
+
+.start-btn:active {
+    transform: scale(0.98);
+}
+
+/* --- PULSING SCREEN VIGNETTE OVERLAY --- */
+.vignette-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+    box-shadow: inset 0 0 60px rgba(255, 92, 92, 0);
+    transition: box-shadow 0.3s ease;
+}
+
+.vignette-overlay.active {
+    box-shadow: inset 0 0 70px rgba(255, 92, 92, 0.7);
+    animation: pulseVignette 1.5s infinite alternate;
+}
+
+@keyframes pulseVignette {
+    0% {
+        box-shadow: inset 0 0 50px rgba(255, 92, 92, 0.45);
+    }
+    100% {
+        box-shadow: inset 0 0 90px rgba(255, 92, 92, 0.8);
+    }
+}
+
+/* --- BOTTOM INFO PANEL --- */
+.game-instructions {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+    padding: 15px 20px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    box-sizing: border-box;
+}
+
+.instruction-group {
+    flex: 1;
+    margin: 0 15px;
+}
+
+.instruction-group h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.05rem;
+    color: var(--accent-pastel);
+    font-weight: 600;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 6px;
+}
+
+.instruction-group ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.instruction-group li {
+    margin-bottom: 8px;
+    font-size: 0.88rem;
+    display: flex;
+    align-items: center;
+}
+
+/* Styling keycaps */
+.key {
+    background: linear-gradient(180deg, #322b54 0%, #201b3a 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 3px solid rgba(0, 0, 0, 0.5);
+    border-radius: 6px;
+    padding: 2px 7px;
+    margin-right: 8px;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 0.8rem;
+    display: inline-block;
+    color: #fff;
+    min-width: 16px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.instruction-group p {
+    font-size: 0.88rem;
+    line-height: 1.4;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+    .game-instructions {
+        flex-direction: column;
+    }
+    .instruction-group {
+        margin: 10px 0;
+    }
+    .canvas-wrapper {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16/9;
+    }
+    .guide-content {
+        flex-direction: column;
+        overflow-y: auto;
+    }
+}

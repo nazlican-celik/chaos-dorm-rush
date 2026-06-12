@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chaos Dorm Rush: Daydream Mode</title>
+    <!-- Linking a premium modern font from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <header class="game-header">
+            <h1>Chaos Dorm Rush: Daydream Mode</h1>
+            <p class="subtitle">Will you survive the semester, or get lost in a daydream?</p>
+        </header>
+
+        <!-- Relative wrapper to contain the canvas and absolute overlays -->
+        <div class="canvas-wrapper">
+            <!-- The 960x540 HTML Canvas where all game action will be drawn -->
+            <canvas id="gameCanvas" width="960" height="540"></canvas>
+
+            <!-- Guide Overlay covering the canvas before start -->
+            <div id="startGuideOverlay" class="guide-overlay">
+                <h2 class="guide-title">Know Your Chaos Before You Run</h2>
+                
+                <div class="guide-content">
+                    <div class="guide-col">
+                        <h3>Good Items</h3>
+                        <ul>
+                            <li><span class="emoji">☕</span> <strong>Coffee:</strong> +10 Pts, +3 Focus</li>
+                            <li><span class="emoji">📚</span> <strong>Notes:</strong> +15 Pts</li>
+                            <li><span class="emoji">🔌</span> <strong>Charger:</strong> +20 Pts, +5 Focus</li>
+                            <li><span class="emoji">📶</span> <strong>Wi-Fi:</strong> +25 Pts</li>
+                            <li><span class="emoji">⭐</span> <strong>Lucky Star:</strong> +30 Pts, Combo x2</li>
+                            <li><span class="emoji">🌀</span> <strong>Portal:</strong> Daydream Mode!</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="guide-col">
+                        <h3>Dream Items (Daydream Only)</h3>
+                        <ul>
+                            <li><span class="emoji">💎</span> <strong>Dream Crystal:</strong> +40 Pts</li>
+                            <li><span class="emoji">✨</span> <strong>Fantasy Star:</strong> +50 Pts</li>
+                            <li><span class="emoji">🔑</span> <strong>Glowing Key:</strong> +75 Pts</li>
+                            <li><span class="emoji">💭</span> <strong>Thought Bubble:</strong> +35 Pts</li>
+                            <li><span class="emoji">⏰</span> <strong>Reality Check:</strong> +10 Fcs, Exit early</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="guide-col">
+                        <h3>Hazards & Obstacles</h3>
+                        <ul>
+                            <li><span class="emoji">🪫</span> <strong>Low Battery:</strong> -15 Focus</li>
+                            <li><span class="emoji">📱</span> <strong>Social Trap:</strong> -20 Focus, Reset Combo</li>
+                            <li><span class="emoji">📅</span> <strong>Deadline Monster:</strong> -25 Focus</li>
+                            <li><span class="emoji">☁️</span> <strong>Overthinking:</strong> -10 Focus (Slide!)</li>
+                            <li><span class="emoji">😴</span> <strong>Sleep Demon:</strong> Slows speed briefly</li>
+                            <li><span class="emoji">👻</span> <strong>Project Ghost:</strong> -15 Fcs, Reset Combo</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="guide-footer">
+                    <p class="controls-text">
+                        Controls: <span class="key">Space</span> / <span class="key">▲</span> Jump &nbsp;|&nbsp; 
+                        <span class="key">▼</span> Slide &nbsp;|&nbsp; 
+                        <span class="key">P</span> Pause &nbsp;|&nbsp; 
+                        <span class="key">R</span> Restart &nbsp;|&nbsp; 
+                        <span class="key">M</span> Mute Music
+                    </p>
+                    <button id="startButton" class="start-btn">Click Here or Press SPACE to Start</button>
+                </div>
+            </div>
+
+            <!-- Pulsing red low focus vignette overlay -->
+            <div id="lowFocusVignette" class="vignette-overlay"></div>
+        </div>
+
+        <footer class="game-instructions">
+            <div class="instruction-group">
+                <h3>Controls Cheat Sheet</h3>
+                <ul>
+                    <li><span class="key">Space</span> or <span class="key">▲</span> Jump (avoid low obstacles)</li>
+                    <li><span class="key">▼</span> Slide (avoid clouds/trap apps, or fall fast)</li>
+                    <li><span class="key">M</span> Toggle Music On/Off</li>
+                    <li><span class="key">P</span> Pause / Resume &nbsp;|&nbsp; <span class="key">R</span> Restart</li>
+                </ul>
+            </div>
+            <div class="instruction-group">
+                <h3>Audio Options</h3>
+                <p>Press <span class="key">M</span> to mute/unmute the chiptune synthesizer at any time. Music plays only after starting.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Loading our JavaScript file at the end -->
+    <script src="game.js"></script>
+</body>
+</html>
